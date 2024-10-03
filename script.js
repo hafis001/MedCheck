@@ -142,7 +142,10 @@ function preventDefaults(e) {
 // Disable right-click and other actions
 document.addEventListener('contextmenu', preventDefaults);
 document.addEventListener('keydown', function(e) {
-    if ((e.ctrlKey && e.key === 's') || (e.key === 'F12') || (e.key === 'I')) {
+    // Disable Ctrl+S, F12, and Ctrl+Shift+I
+    if ((e.ctrlKey && (e.key === 's' || e.key === 'S')) || 
+        (e.key === 'F12') || 
+        (e.ctrlKey && e.shiftKey && e.key === 'I')) {
         preventDefaults(e);
     }
 });
@@ -158,9 +161,9 @@ setInterval(() => {
     const widthThreshold = window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold;
     if (widthThreshold && !devToolsOpen) {
         devToolsOpen = true;
-        alert("Developer tools are open. Please close them.");
-        // Optionally, you can redirect or reload
-        // location.reload();
+        alert("Developer tools are open. Redirecting to 404 page.");
+        // Redirect to a 404 page
+        window.location.href = '404.html'; // Replace with your 404 page URL
     } else if (!widthThreshold) {
         devToolsOpen = false;
     }
@@ -176,3 +179,11 @@ overlay.style.height = '100%';
 overlay.style.zIndex = '9999';
 overlay.style.pointerEvents = 'none';
 document.body.appendChild(overlay);
+
+// Prevent screen capture
+document.addEventListener('keydown', function(e) {
+    // Disable Print Screen key
+    if (e.key === 'PrintScreen') {
+        preventDefaults(e);
+    }
+});

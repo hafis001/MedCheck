@@ -35,43 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
 // Disable print functionality
 window.onbeforeprint = preventDefaults;
 
-// Apply styles dynamically (could be replaced with a link to a CSS file)
-const styles = `
-    /* Prevent text selection */
-    body {
-        user-select: none; /* Standard syntax */
-        -webkit-user-select: none; /* Safari */
-        -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-    }
-    /* Prevent dragging of images */
-    img {
-        pointer-events: none;
-    }
-    /* Hide elements when right-clicked */
-    .no-save img {
-        pointer-events: none;
-    }
-    /* Example watermark */
-    .watermarked {
-        position: relative;
-        display: inline-block;
-    }
-    .watermarked::after {
-        content: '© YourSite';
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
-        font-size: 12px;
-
-        pointer-events: none;
-    }
-    /* Obfuscated text */
-    .obfuscated {
-        color: transparent;
-        background-color: transparent;
-    }
-`;
 
 // Create a style element and append styles
 const styleSheet = document.createElement("style");
